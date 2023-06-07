@@ -1,0 +1,438 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*UTWORZONO ZMIENNE --  podobno przyspieszaja i organizuja prace */
+
+html{
+    font-size: 62.5%;
+    --header1: calc(2rem + 1vw);  /*Nie wiem co to robi jakis dynamiczny wzrost ale nie ogarniam*/
+    --header2: calc(3.5rem + 1vw);
+    --header3: calc(3rem + 1vw);
+    --header4: calc(2.4rem + 1vw);
+    --text: calc(1.5rem + 1vw);
+    --big: calc(2.4rem + 1vw);
+
+
+    --special-color: #906272;
+    --background-color: #414141;
+    --gray-text: #525252;
+}
+
+/*DODANO POBRANE FONTY*/
+
+@font-face {
+    font-family: 'Ruhl Regular';
+    src: url(fonts/FrankRuhlLibre-Regular.ttf);
+}
+@font-face {
+    font-family: 'Ruhl Medium';
+    src: url(fonts/FrankRuhlLibre-Medium.ttf);
+}
+@font-face {
+    font-family: 'Vibes Regular';
+    src: url(fonts/GreatVibes-Regular.ttf);
+}
+
+
+
+
+h1{
+    font-size: var(--header1);
+}
+
+a,li,button,label,input,p{
+    font-size: var(--text);
+}
+
+h2{
+    font-size: var(--header2);
+}
+
+h3{
+    font-size: var(--header3);
+}
+
+h4{
+    font-size: var(--header4);
+}
+
+h5{
+    font-size: var(--header4);
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+ul{
+    list-style: none;
+}
+
+
+
+/*UTWORZONO KLASE POMOCNICZA -- bedzie mozna dodawac ta klase do div'ow ktore beda uzywac wlsciwosci flex -- podobno ograniczy to powielanie tego samego kodu i zwiekszy przejzystosc*/
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+body{
+    font-family: "Ruhl Regular", sans-serif;
+    animation: opening 1s ease-in-out;          /*Dodajemy animacje otwierajaca do strony. Ustalamy jej czas i efekt przejscia.*/
+}
+
+h1 {
+    font-family: 'Vibes Regular',sans-serif;
+}
+
+
+/*SEKCJA NAWIGACJI*/
+
+.main-head{
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+    position: relative;  /*Aby cien nie zniknal po dodaniu obrazka pod pasek nawigacji nalezy uzyc wlasciwosci position relative*/
+    z-index: 2;
+}
+
+nav{
+    width: 90%;                                     /*Rozciagniecie diva nav na 90% dostepnej przestrzeni*/
+    margin: auto;                                   /*Ustawienie automatycznego marginesu*/
+    
+    
+    display:flex;                                    /**/
+    align-items: center;
+    min-height: 10vh;
+
+    padding: 2rem 0rem;
+}
+
+#logo {
+    flex: 1 1 20rem;
+    font-size: 5rem;
+}
+
+.nav-links{
+    display: flex;
+    justify-content: space-around;
+    flex: 1 1 20rem;
+}
+
+
+/*SEKCJA HERO*/
+
+.hero {
+    min-height: 90vh;
+    
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+
+    overflow: hidden;
+}
+
+.hero-introduction {
+    flex: 1 1 40rem;
+    text-align: center;
+}
+
+.hero-introduction p{
+    padding: 5rem 10rem;
+    color: var(--gray-text);
+}
+
+.hero-introduction h2{
+    padding-top: 3rem;
+}
+.hero-introduction a{
+    padding: 2rem 8rem;
+    border: 2px solid black;
+    margin-bottom: 4rem;
+}
+.hero-images {
+    background: linear-gradient(#dad8dd, #dad1d4);
+    position: relative;                                                     /*USTAWIAMY NA DIVIE HERO-IMAGES wlasciwosc relative dzieki temu wszystkie obrazki z wlasciwoscia absolute beda sie ustawiac w jego ramach */
+    z-index: 1;                                                            /*Ustawiamy z index na 1 aby byl przed roslinami o indexie -1*/
+}
+
+.hero-elena {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;                                                  /*Ustawiamy object-fit na cover aby nie wystawal poza diva i poza ekran*/
+}
+
+
+.plants{
+    position: absolute;
+    bottom: 0;
+    left: -15%;         /*pozycjonujemy rosliny na -15% w lewo Naszym punktem 0 jest ten div ktoremu nadalismy wlasciwosc position: relative czyli hero-images*/
+    z-index: -1;
+    
+    animation: plant-entrance 1.5s ease-in-out, plant-shake 2.5s ease alternate-reverse infinite 1.6s ; /*Animacja wjesca dla roslin*/
+    /*Animacja bujania sie roslin EASE - lagodne przejscie pomuedzy wskazanymi stanmi ALTERNATE-REVERSE - animacja odbedzie sie w dwie strony od poczatku do konca a potem od konca do poczatku  INFINITE - Animacja bedzie sie powtarzac bez konca*/
+    transform-origin: bottom;  /*Oznacza to ze animacja rozpocznie sie od BOTTOM czyli dolnej czesci diva*/
+
+
+    max-height: 80%;    /*Ustawiono maxymalny rozmiar roslin w % dzieki temu dalej dostosowuja swoj rozmiar i wspieraja responsywnosc witryny. I jednosczesnie nie wskakuja na text i przycisk na malych ekranach*/
+}
+
+.plant2{
+    left: 50%;      
+}
+
+
+
+
+/*SEKCJA ABOUT*/
+
+.about{
+    background-color: #906272;
+    min-height: 100vh;      /*Nadanie sekcji rozmiaru wysokosci*/
+    display: flex;          /*Ustawienie div'ow w pozycji pionowej i nadanie dostepu do wlasciwosci powiazanych z display flex*/
+    flex-wrap: wrap;        /*Dzieki tej wlasciwosci text bedzie sie zawijal na mniejszych ekranach*/
+}
+
+.about-text{
+    flex: 2 1 40rem;
+    justify-content: space-around; /*Rozdziela kontent zawarty w divie dodaje przestrzen w okol*/
+    background-color: var(--background-color);
+    color: white;
+}
+
+.about-text div{
+padding: 3rem 8rem;
+}
+.about-text h3{
+    padding: 2rem 0rem;
+    font-family: "Ruhl Medium";
+}
+.about-text h2{
+    padding: 4rem;
+    font-family: "Vibes regular";
+}
+
+.about-image{
+    flex: 1 1 40rem;
+    background-color: #629079;
+    object-fit: cover;
+    position: relative;
+}
+.about-image h5{
+    position: absolute; /*Dzieki temu text naklada sie na zdjecie a nie tworzy wlasnej przestrzeni w divie*/
+
+    top: 10%;                               /*Ten zapis sprawia ze nasz text zawsze jest w tej samej pozycji nie zaleznie od wielkosci ekranu.*/
+    left: 55%;                              /*Wlasciwosci top i left ustawiaja text na srodku*/
+    transform: translate(-55%, -10%);       /*A wlasciwosc transform translate przesowa go dynamicznie tak by zawsze byl we wskazanym miejscu*/
+
+    letter-spacing: 2rem;
+
+
+}
+.about-image img{       /*Dzieki temu zapisowi zdjecie rozciaga sie na cala przestrzen w divie*/
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /*Dzieki temu zdjecie nie zmienia swojego rozmiaru. Nie rozciaga sie na boki*/
+}
+
+
+/*SEKCJA GALLERY*/
+
+.gallery{
+    display: grid;  /*Odblokowuje wlaciwosci dostepne dla grid*/
+    grid-template-columns: repeat(3,1fr); /*Tworzymy siatke w ktorej beda 3 kolumny o wielkosci 1fr*/
+    
+    min-height: 100vh; /*Ustala minimalny dopuszczalny rozmiar zdjecia*/
+
+    position: relative;
+}
+.gallery-photos{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.gallery1{
+    grid-column: 1/3;
+    grid-row: 1;
+}
+.gallery2{
+    grid-column: 3;
+    grid-row: 1/3;
+}
+.gallery3{
+    grid-column: 1;
+    grid-row: 2;
+}
+.gallery4{
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.gallery-head{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 3;
+
+    color: white;
+    background-color: rgba(11, 16, 27, 0.772);
+    padding: 5rem 10rem;
+
+    text-align: center;
+}
+
+
+/*ANIMACJE*/
+
+@keyframes opening{      /*EFEKT MRUGNIECIA Prosta animacja otwarcia strony polega na zmianie widocznosci z opacity 0 do opacity 1 czyli od niczego do wlasciwego widoku strony */
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+
+@keyframes plant-entrance{  /*EFEKT PRZESUNIECIA Rosliny rusza sie o 10% a nastepnie wroca do tego samego miejsca*/
+    from{
+        transform: translateY(10%) rotateZ(-7deg)  rotateX(-50deg);  /*TranslateY oznacza ze przesuniecie bedize w osi Y czyli wertykalne         rotateZ oznacza ze obiekt obroci sie w osi z od -7stopni do 0   */
+    }
+    to{
+        transform: translatY(0%) rotateZ(0deg) rotateX(0deg);
+    }
+}
+
+
+@keyframes plant-shake{
+    from{
+        transform: rotateZ(-2deg);
+    }
+    to{
+        transform: rotateZ(0);
+    }
+}
+
+
+
+/*MEDIA QUERY*/
+
+/*BURGER MENU*/
+
+.burger, .menu-check {
+    display: none;
+}
+
+@media screen and (max-width: 842px){               /*Dzieki odpowiedniemu media screen query okreslamy od jakiej wielkosci ekranu nasze burger menu ma byc widoczne*/
+    
+    .hero{
+        width: 100%;
+    }
+    .hero-introduction p {
+        padding: 5rem 3rem;                         /*Zmieniono padding na nieco mniejszy dzieki temu text lepiej uklada sie mniejszych ekranach*/
+    }
+    
+    
+    
+    .burger {
+        position: relative;                         /*Dzieki temu burger jest widoczny*/
+        display: block;
+    }
+    .burger span{                                   /*Burger menu sklada sie z 3 spanow dodanych w html*/
+        padding: 0.2rem 2rem;                       /*Po przez padding okreslamy ich grubosc i dlugosc*/
+        background: var(--gray-text);               /*Spany musza miec jakis kolor zeby byly widoczne tutaj wybrano kolor opisany w zmiennej css jako --gray-text*/
+        margin: 0.5rem 0rem;                        /*Dzieki wlasciwosci margin pozycjonujemy burger menu*/
+        display: block;                             /*Naturalnie w sekcji nav elementy na stronie ukladaja sie jeden obok drugiego dzieki wlasciwosci display FLEX. Aby wrocic do ukladu domyslnego dla html czyli wertykalnego trzeba zastosowac wlasciwosc display BLOCK*/
+
+        transition:all 0.5s ease;
+    }
+    .nav-links a {                                  /*Zmienia kolor i stylizacje przyciskow nawigacji po przejsciu na maly ekran*/
+        color: white;
+        font-size: var(--header3);
+        text-decoration: underline;
+    }
+    .nav-links{                                     /*Opisuje co stanie sie z przyciaksmi nawigacji po wejsciu na mniejszy ekran */
+        background: var(--background-color);
+        position: fixed;
+
+        width: 100%;
+        height: 100%;
+
+        top: 0;
+        left: 100%;
+
+        flex-direction: column;
+        align-items: center;
+
+
+        transition: transform 1s ease;                /*Nadanie animacji*/
+    }
+
+    .menu-check{                                      /*Utworzylismy checkbox ktory bedzie pelnil funkcje przycisku dzialjacego w dwoch stanach. Dzieki temu bedziemy mogli klikac na span burger menu a tak naprawde zaznaczac i odznaczac check box*/
+        position: absolute;
+        top: 50%;
+        right: 5%;
+
+        transform: translate(5%, -50%);
+
+        width: 5rem;
+        height: 5rem;
+
+        cursor: pointer;
+
+        opacity: 0;                                     /*Dzieki opacity 0 nie widzimy checkboxa zlokalizowanego na pozycji span burger menu */
+
+        z-index: 3;
+
+        display: block;
+    }
+
+    .menu-check:checked + .nav-links{                   
+        transform: translate(-100%);
+    }
+    .menu-check:checked ~ .burger span{
+        background-color: white;
+    }
+
+
+    .menu-check:checked ~.burger span:nth-child(1) {
+        transform: rotateZ(45deg) translateY(320%);
+    }
+    .menu-check:checked ~.burger span:nth-child(3) {
+        transform: rotateZ(-45deg) translateY(-320%);
+    }
+    .menu-check:checked ~.burger span:nth-child(2) {
+        opacity: 0;
+    }
+
+
+    /*SEKCJA ABOUT*/
+
+    .about-text div{                /*Na malych ekranach padding ustawiony dla regularnego rozmiaru witryny wydawal sie za duzy dlatego go zmniejszamy po przekroczeniu pewnej ilosci pixeli*/
+        padding: 3rem 3rem;
+    }
+
+    /*SEKCJA GALLERY*/
+
+    .gallery img{                   /*RESPONSIVE GRID*/
+        grid-row: auto;
+        grid-column: auto;
+    }
+    .gallery{
+        grid-template-columns: repeat(auto-fit, minmax(20rem,1fr));
+    }
+    .gallery-head{
+            grid-column: 2;
+            grid-row: 1;
+            padding: 10rem 2rem;
+            position: relative;
+    }
+}
+    
